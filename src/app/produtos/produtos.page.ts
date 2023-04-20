@@ -1,6 +1,6 @@
 import { ProdutosService } from './../services/produtos.service';
 import { Produto } from './../models/Produto.model';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
@@ -17,10 +17,10 @@ export class ProdutosPage {
 
   listaProdutos: Produto[] = [];
 
-  constructor() { }
+  constructor(private produtosService: ProdutosService) { }
 
   buscarClientes(){
-    this.ProdutosService.getAll().subscribe(dados =>{
+    this.produtosService.getAll().subscribe(dados =>{
       this.listaProdutos = dados as Produto[];
     });
   }
