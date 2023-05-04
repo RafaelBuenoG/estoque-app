@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import { ClientesService } from '../services/clientes.service';
+import { Cliente } from '../models/Cliente.model';
 
 @Component({
   selector: 'app-create-cliente',
@@ -17,10 +19,26 @@ export class CreateClientePage implements OnInit {
   email= '';
   senha= '';
   confirmaSenha= '';
-
-  constructor() { }
+ 
+  constructor(private router: Router, private clientesService: ClientesService) { }
 
   ngOnInit() {
   }
 
+  salvar(){
+    if(this.senha === this.confirmaSenha){
+      const cliente: Cliente = {
+        nome: this.nome,
+        email: this.email,
+        senha: this.senha
+      }
+      this.clientesService.create(cliente).subscribe(dados => {
+        alert("Cliente inserido com sucesso" + dados.id)
+        this.router.navigateByUrl('/home');
+      })
+    }else{
+      alert("Senhas nao conferem!")
+    }
+  }
+  
 }
