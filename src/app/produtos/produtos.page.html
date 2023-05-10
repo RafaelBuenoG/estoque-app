@@ -5,9 +5,19 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">produtos</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-item *ngFor="let produtos of listaProdutos">
+    <ion-label>
+      {{produtos.nome}}
+    </ion-label>
+    <ion-button color="warning" (click)="alterarProdutos(produtos.id!)">
+      <ion-icon slot="icon-only" name="create-outline"></ion-icon>
+    </ion-button>
+    <ion-button color="danger" (click)="excluirProdutos()">
+      <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+    </ion-button>
+  </ion-item>
+
+<ion-button routerLink="/create-produtos">
+  Adicionar produto
+</ion-button>
 </ion-content>

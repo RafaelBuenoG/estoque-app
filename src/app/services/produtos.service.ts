@@ -8,12 +8,15 @@ import { catchError, EMPTY, map, Observable } from 'rxjs';
 })
 export class ProdutosService {
 
-  url='http://localhost:3000/clientes'
+  url='http://localhost:3000/produtos'
 
   constructor( private http: HttpClient) { }
 
-  create(produto: Produto){
-    return this.http.post(this.url, produto);
+  create(produto: Produto): Observable<Produto>{
+    return this.http.post<Produto>(this.url, produto).pipe(
+      map(retorno => retorno),
+      catchError(erro => this.exibirErro(erro))
+    );
   }
 
   getAll(): Observable<Produto[]> {
@@ -23,12 +26,18 @@ export class ProdutosService {
     );
   }
 
-  getOne(id: number){
+  getOne(id: number): Observable<Produto>{
     // return this.http.get(this.url + '/' + id);
-    return this.http.get(`${this.url}/${id}`);
+    return this.http.get<Produto>(`${this.url}/${id}`).pipe(
+      map(retorno => retorno),
+      catchError(erro => this.exibirErro(erro))
+      );
   }
   update(produto : Produto){
-    return this.http.put(`${this.url}/${produto.id}`, produto);
+    return this.http.put<Produto>(`${this.url}/${produto.id}`, produto).pipe(
+      map(retorno => retorno),
+      catchError(erro =>this.exibirErro(erro))
+    );
   }
 
   delete(id: number){

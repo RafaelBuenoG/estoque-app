@@ -1,0 +1,16 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Criar Produto</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true"  class="ion-padding">
+  <ion-input type="text" fill="outline" label="Nome" labelPlacement="floating" helperText="Digite o produto" [(ngModel)] = "nome"></ion-input>
+  <br> 
+  <ion-input type="text" fill="outline" label="Descrição" labelPlacement="floating" helperText="Acerta pelo menos isso" [(ngModel)] = "descricao"></ion-input>
+
+  <ion-button expand="block" (click)="salvar()">
+    Salvar
+  </ion-button>
+
+</ion-content>
